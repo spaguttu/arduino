@@ -1,0 +1,21 @@
+int luce = 0;
+int x;
+int ritardo = 10;
+void setup() 
+{
+  pinMode(13, OUTPUT);
+}
+
+void loop() 
+{
+  for (x = 0; x < 255; x++) {
+    analogWrite(13, luce);
+    luce++;
+    delay(ritardo);
+  }
+  for (x = 0; x < 255; x++) {
+    analogWrite(13, luce);
+    luce--;
+    delay(ritardo);
+  } 
+}
