@@ -1,21 +1,16 @@
-int luce = 0;
-int x;
-int ritardo = 10;
-void setup() 
-{
-  pinMode(13, OUTPUT);
-}
+int leddino = 13;
+int luce = 1;
+int cambiadi = 5;
+int ritardo = 30;
+void setup(){pinMode(leddino, OUTPUT);}
+void loop(){
+analogWrite(leddino, luce);
 
-void loop() 
-{
-  for (x = 0; x < 255; x++) {
-    analogWrite(13, luce);
-    luce++;
-    delay(ritardo);
-  }
-  for (x = 0; x < 255; x++) {
-    analogWrite(13, luce);
-    luce--;
-    delay(ritardo);
-  } 
+luce = luce + cambiadi;
+   if (luce <= 0)
+    {   cambiadi= -cambiadi;} 
+    if (luce >= 255){
+        cambiadi= -cambiadi;} 
+     
+         delay(ritardo);
 }
