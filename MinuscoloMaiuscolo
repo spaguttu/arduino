@@ -1,0 +1,16 @@
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  if (Serial.available() > 0) {
+    char entra = Serial.read();
+    if (entra > 122 || entra < 97)
+    {
+      Serial.print(entra);
+    }
+    else {
+      char esce = entra - 32;
+      Serial.print(esce);
+    }
+  }
+}//stampa in maiuscolo entrate in maiuscolo e/o minuscolo
