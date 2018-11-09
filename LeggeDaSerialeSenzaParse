@@ -1,0 +1,51 @@
+int i, valore, num1, num2, num3, cifra;
+void setup() {
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  i = 0;
+ 
+}
+ 
+void loop() {
+  while (Serial.available()) {
+    cifra = Serial.read();
+    if (i > 3 || cifra == 13)
+    {
+      switch (i)
+      {
+        case 1:
+          valore = num1;
+          break;
+        case 2:
+          valore = num1 * 10 + num2;
+          break;
+        case 3:
+          valore = num1 * 100 + num2 * 10 + num3;
+          break;
+      }
+      if (valore > 255) valore = 255;
+      if (i)
+      {
+        Serial.println(valore);
+        analogWrite(13, valore);
+        i = 0;
+      }
+    }
+    else if (cifra > 47 && cifra < 58)
+    {
+      i++;
+      switch (i)
+      {
+        case 1:
+          num1 = cifra - 48;
+          break;
+        case 2:
+          num2 = cifra - 48;
+          break;
+        case 3:
+          num3 = cifra - 48;
+          break;
+      }
+    }
+  }
+}
