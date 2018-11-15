@@ -1,0 +1,76 @@
+int i, valore, num1, num2, num3, num4, num5, num6;
+int cifra, porta;
+void setup() {
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  i = 0;
+
+}
+
+void loop() {
+
+  while (Serial.available()) {
+    cifra = Serial.read();
+    if (cifra == 43 )
+    {
+      if (cifra == 43)
+      {
+        switch (i)
+        {
+          case 1:
+            valore = num1;
+            break;
+          case 2:
+            valore = num1 * 10 + num2;
+            break;
+          case 3:
+            valore = num1 * 100 + num2 * 10 + num3;
+            break;
+          case 4:
+            valore = num1 * 1000 + num2 * 100 + num3 * 10 + num4;
+            break;
+          case 5:
+            valore = num1 * 10000 + num2 * 1000 + num3 * 100 + num4 * 10 + num5;
+            break;
+          case 6:
+            valore = num1 * 100000 + num2 * 10000 + num3 * 1000 + num4 * 100 + num5 * 10 + num6;
+            break;
+        }
+        if (i > 0)
+        {
+
+          Serial.println("valore della porta cambiato in");
+          Serial.println(porta);
+          Serial.end();
+          Serial.begin(porta);
+          i = 0;
+        }
+      }
+      else if (cifra > 47 && cifra < 58)
+      {
+        i++;
+        switch (i)
+        {
+          case 1:
+            num1 = cifra - 48;
+            break;
+          case 2:
+            num2 = cifra - 48;
+            break;
+          case 3:
+            num3 = cifra - 48;
+            break;
+          case 4:
+            num4 = cifra - 48;
+            break;
+          case 5:
+            num5 = cifra - 48;
+            break;
+          case 6:
+            num6 = cifra - 48;
+            break;
+        }
+      }
+    }
+  }
+}
