@@ -1,4 +1,7 @@
-pinMode(13, OUTPUT);
+
+int i, valore, num1, num2, num3, num4, num5, num6, cifra;
+void setup() {
+  pinMode(13, OUTPUT);
   Serial.begin(9600);
   i = 0;
 }
@@ -19,7 +22,8 @@ void loop() {
           valore = num1 * 100 + num2 * 10 + num3;
           break;
       }
-       if (i > 0)
+
+      if (i > 0)
       {
         Serial.print("valore assegnato al led-->");
         Serial.println(valore);
@@ -27,7 +31,8 @@ void loop() {
         i = 0;
       }
     }
-     if (cifra == 107 )
+
+    if (cifra == 107 )
     {
       switch (i)
       {
@@ -50,7 +55,8 @@ void loop() {
           valore = num1 * 100000 + num2 * 10000 + num3 * 1000 + num4 * 100 + num5 * 10 + num6;
           break;
       }
-       if (i > 0)
+
+      if (i > 0)
       {
         Serial.print("nuovo valore baud-->");
         Serial.println(valore);
@@ -86,29 +92,3 @@ void loop() {
     }
   }
 }
-      {
-        i++;
-        switch (i)
-        {
-          case 1:
-            num1 = cifra - 48;
-            break;
-          case 2:
-            num2 = cifra - 48;
-            break;
-          case 3:
-            num3 = cifra - 48;
-            break;
-          case 4:
-            num4 = cifra - 48;
-            break;
-          case 5:
-            num5 = cifra - 48;
-            break;
-          case 6:
-            num6 = cifra - 48;
-            break;
-        }
-      }
-    }
-  }
