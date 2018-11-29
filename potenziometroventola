@@ -1,0 +1,23 @@
+int sensorValue = analogRead(A0);
+float voltage = sensorValue * (5.0 / 1023.0);
+float valorepassato = sensorValue * (12.0 / 1023.0); //se il generatore è impostato a 12!
+void setup() {
+  
+  pinMode(13, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  Serial.print(voltage);
+  Serial.println(" V");
+  Serial.print(valorepassato);
+  Serial.println(" V passati alla ventola");
+
+  analogWrite(13, voltage);
+  delay(100);
+
+
+
+}
