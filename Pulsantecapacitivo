@@ -1,0 +1,21 @@
+int toccopin = 7;
+void setup() {
+  pinMode(toccopin, INPUT);
+  Serial.begin(1200);
+  pinMode(13, OUTPUT);
+}
+void loop() {
+
+  int tocco1 = digitalRead(toccopin);
+
+  if (tocco1 == HIGH) {
+    Serial.println(tocco1);
+    digitalWrite(13, HIGH);
+    //  Serial.println("toccato!");
+    delay(50);
+
+  }
+  else {
+    digitalWrite(13, LOW);
+  }
+}
