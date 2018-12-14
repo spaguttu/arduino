@@ -1,12 +1,13 @@
-int bazz; //pin del buzzerino PASSIVO
-int trig;// pin trig del sensore 
-int echo;// pin echo del sensore
+int bazz=2; //pin del buzzerino PASSIVO
+int trig=11;// pin trig del sensore 
+int echo=8;// pin echo del sensore
 int distanza;//convertito dal valore che mi passa il sensore
 int durata;//
 void setup() {
 pinMode(bazz,OUTPUT); // uso il pin del buzzer come output
 pinMode(trig, OUTPUT);//trig è un output
 pinMode(echo,INPUT);//echo è l'input
+digitalWrite(5,HIGH);
 Serial.begin(9600);
  
 }
@@ -26,9 +27,10 @@ Serial.print("distanza: ");
 Serial.println(distanza);
 
 if (distanza<50){
-  tone(bazz,1000);//fai suonare
-  delay(1000);//pausa
+  tone(bazz,1600);//fai suonare
+  delay(250);//pausa
 noTone(bazz);//fai smettere
 
 }
+delay(400);
 }
