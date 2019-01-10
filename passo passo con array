@@ -1,0 +1,63 @@
+int k; //controllare array
+int arrfase[] {22, 24, 23, 25}; //collegare le fasi rispettivamente a,c,b,d
+
+void passopasso(bool orario, int passi, int ritardo) // (true per orario/false per antiorario), numero di passi da eseguire, ritardo tra ogni fase
+{
+  if (orario == true)
+  {
+    k = 0;
+    while (passi > 0) {
+
+      digitalWrite(arrfase[k], HIGH);
+      delay(ritardo);
+      digitalWrite (arrfase[k], LOW);
+      Serial.println(passi);
+      Serial.println(k);
+
+
+      k++;
+      if (k > 3) {
+        k = 0; //così ripete le 4 fasi
+      }
+      passi--;
+
+    }
+  }
+  else
+  {
+    k = 4;
+    while (passi > 0)
+    {
+      digitalWrite(arrfase[k], HIGH);
+      delay(ritardo);
+      digitalWrite (arrfase[k], LOW);
+      Serial.println(passi);
+      Serial.println(k);
+      k--;
+      if (k < 0) {
+        k = 3; //così ripete le 4 fasi
+      }
+      passi--;
+
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(22, OUTPUT);
+  pinMode(23, OUTPUT);
+  pinMode(24, OUTPUT);
+  pinMode(25, OUTPUT);
+  digitalWrite(22, LOW);
+  digitalWrite(23, LOW);
+  digitalWrite(24, LOW);
+  digitalWrite(25, LOW);
+}
+
+void loop()
+{
+  passopasso(0, 150,300);
+  Serial.print("fatto");
+  delay(10000);
+}
