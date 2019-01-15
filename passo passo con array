@@ -21,7 +21,7 @@ void passopasso(bool orario, int passi, int ritardo) // (true per orario/false p
   }
   else
   {
-    k = 4;
+    k = 3;
     while (passi > 0)
     {
       digitalWrite(arrfase[k], HIGH);
