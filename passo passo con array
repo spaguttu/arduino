@@ -1,4 +1,4 @@
-int k; //controllare array
+int k; //controllare array 
 int arrfase[] = {22, 23, 24, 25}; //collegare le fasi rispettivamente a,c,b,d(?)
 void passopasso(bool orario, int passi, int ritardo) // (true per orario/false per antiorario), numero di passi da eseguire, ritardo tra ogni fase
 {
