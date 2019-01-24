@@ -1,0 +1,73 @@
+/* connettere l'input analogico al pin A1. Due velocità diverse (ritardo e breve) .
+
+int k; //controllare array
+int arrfase[] = {28, 29 , 30, 31}; //collegare le fasi rispettivamente a,b,c,d
+float leva; 
+int ritardo = 100;
+int breve = 20;
+void setup() {
+  Serial.begin(9600);
+  pinMode(28, OUTPUT);
+  pinMode(29, OUTPUT);
+  pinMode(30, OUTPUT);
+  pinMode(31, OUTPUT);
+  pinMode(A1, INPUT);
+  digitalWrite(28, LOW);
+  digitalWrite(29, LOW);
+  digitalWrite(30, LOW);
+  digitalWrite(31, LOW);
+}
+
+void loop() {
+  leva = analogRead(A1);
+  delay(100);
+  Serial.println(leva);
+  if (leva > 560 && leva < 1023) {
+    digitalWrite(arrfase[k], HIGH);
+    delay(ritardo);
+    digitalWrite (arrfase[k], LOW);
+    delay(ritardo);
+    k++;
+    if (k > 3)
+    {
+      k = 0; //così ripete le 4 fasi
+    }
+    leva = analogRead(A1);
+  }
+  else if  (leva < 450 && leva > 1) {
+    digitalWrite(arrfase[k], HIGH);
+    delay(ritardo);
+    digitalWrite (arrfase[k], LOW);
+    delay(ritardo);
+    k--;
+    if (k < 0)
+    {
+      k = 3; //così ripete le 4 fasi
+    }
+    leva = analogRead(A1);
+  }
+  else if  (leva == 1024) {
+    digitalWrite(arrfase[k], HIGH);
+    delay(breve);
+    digitalWrite (arrfase[k], LOW);
+    delay(breve);
+    k++;
+    if (k > 3)
+    {
+      k = 0; //così ripete le 4 fasi
+    }
+    leva = analogRead(A1);
+  }
+  else if  (leva == 0) {
+    digitalWrite(arrfase[k], HIGH);
+    delay(breve);
+    digitalWrite (arrfase[k], LOW);
+    delay(breve);
+    k--;
+    if (k < 0)
+    {
+      k = 3; //così ripete le 4 fasi
+    }
+    leva = analogRead(A1);
+  }
+}
