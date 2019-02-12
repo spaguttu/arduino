@@ -1,0 +1,39 @@
+float gradiletti;
+float GRADISETTATI=50.0;
+unsigned long TEMPOSETTATO=1800000; //30 minuti
+unsigned long tempostop;
+unsigned long tempostart;
+unsigned long differenzatempo;
+bool EV12;
+bool EV34;
+bool CAL;
+bool PDC;
+int pinEV12=5;
+int pinEV34=6;
+int pinCAL=7;
+int pinPDC=8;
+int pinSONDA=A2;
+void setup() {
+  Serial.begin(1200);
+pinMode (pinEV12,OUTPUT);
+pinMode (pinEV34,OUTPUT);
+pinMode (pinCAL,OUTPUT);
+pinMode (pinPDC,OUTPUT);
+pinMode (pinSONDA,INPUT);
+Serial.print("tempo in millisecondi dove la temperatura deve rimanere al di sopra di ");
+Serial.print(GRADISETTATI);
+Serial.print(" gradi :");
+Serial.println(TEMPOSETTATO);
+Serial.print("temperatura attuale letta dalla sonda");
+Serial.println(gradiletti);
+}
+
+void loop() {//delay(60000); esegue tutto il loop ogni 60 secondi
+  gradiletti=analogRead(pinSONDA);
+  Serial.println(gradiletti);
+}
+//gradiletti>GRADISETTATI -> 
+//digitalWrite(pin ev12,pinPDC HIGH);(pinEV34,pinCAL LOW);
+//gradiletti<GRADISETTATI digitalWrite(pin ev12,pinPDC LOW);(pinEV34,pinCAL HIGH)
+//void scambia?(digitalWrite(pin ev12,pinPDC HIGH);(pinEV34,pinCAL LOW);
+//gradiletti<GRADISETTATI digitalWrite(pin ev12,pinPDC LOW);(pinEV34,pinCAL HIGH)
