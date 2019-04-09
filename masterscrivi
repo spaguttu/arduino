@@ -1,0 +1,18 @@
+#include <Wire.h>
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin(); // join i2c bus (address optional for master)
+}
+
+char x = 0;
+
+void loop() {
+  Wire.beginTransmission(8); // transmit to device
+  if (Serial.available() > 0) {
+    x = Serial.read();
+    Wire.print(x);
+    Wire.endTransmission();
+  }  // stop transmitting
+  delay(5);
+}
