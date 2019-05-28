@@ -1,0 +1,44 @@
+masterslave
+
+#include <Wire.h>
+int scelto;
+void setup(){
+Serial.begin(9600);//parte monitor seriale
+  Wire.begin(); //parte comunicazione i2c
+}
+  void loop() {
+    if (Serial.available() > 0)   //se qualcosa è inserito nel monitor seriale
+    {
+
+      String s = Serial.readStringUntil(13); //la String s(nota la maiuscola)è formata dai caratteri fino al ritorno carrello 
+      Serial.println(s);//controlla nel monitor seriale del master se la stringa è quella desiderata
+ if (s[0]=='1'){scelto=8;} //per scegliere a quale indirizzo mandare il messaggio
+ if (s[0]=='2'){scelto=9;}
+      Wire.beginTransmission(scelto); // trasmette al primo se la prima cifra è 1, (es 1:),al secondo se 2(es 2:);
+      for (int i = 0; i < s.length(); i++) { //loop che passa ogni carattere e lo manda via i2c
+        Wire.write(s[i]);              //
+      }
+      Wire.println();       //a capo,per pulizia
+        Wire.endTransmission();    // termina la trasmissione 
+    }
+  }
+
+PARTE SLAVE
+----------------------------
+#include <Wire.h>
+
+void setup() {
+  Wire.begin(8);                // indirizzo #8 (modifica per diverso numero di slave)
+  Wire.onReceive(receiveEvent); // quando riceve via Wire parte la funzione tra parentesi
+  Serial.begin(9600);           // seriale per visualizzare il messaggio
+}
+
+void loop() {
+  delay(100);
+}
+void receiveEvent(int quanti) {
+  while (Wire.available() > 0) { //se c'è qualcosa in arrivo
+    char c = Wire.read(); // Riceve ogni carattere
+    Serial.print(c);         // Scrive il carattere ricevuto
+  }
+}
